@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* for glow around progress bar in loading page */
+.glow {
+    box-shadow:
+        0 0 6px rgba(186, 242, 229, 0.6),
+        0 0 16px rgba(186, 242, 229, 0.45),
+        0 0 36px rgba(186, 242, 229, 0.25);
+}
 
 /* for logo of the game */
 .oxenfree-spectral {
