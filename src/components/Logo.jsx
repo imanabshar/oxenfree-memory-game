@@ -8,7 +8,7 @@ function Logo({ variant }) {
           ${
             isIntro
               ? "text-[7rem] tracking-[0.3em]"
-              : "text-3xl tracking-[0.25em]"
+              : "text-6xl tracking-[0.25em]"
           }
         `}
       >
@@ -20,7 +20,7 @@ function Logo({ variant }) {
           ${
             isIntro
               ? "text-4xl tracking-[0.65em]"
-              : "text-xs tracking-[0.5em] opacity-70"
+              : "text-2xl tracking-[0.5em]"
           }
         `}
       >
