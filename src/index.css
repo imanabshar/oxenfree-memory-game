@@ -102,10 +102,9 @@
 .sub-title {
     font-family: "Cinzel", serif;
     letter-spacing: 0.2em;
-    color: #baf2e5; 
+    color: #baf2e5;
     text-shadow:
         1px 1px 0 rgba(0, 0, 0, 0.3),
-        2px 2px 2px rgba(0, 0, 0, 0.4); 
+        2px 2px 2px rgba(0, 0, 0, 0.4);
 }
-
 

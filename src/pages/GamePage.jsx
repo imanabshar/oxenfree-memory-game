@@ -1,6 +1,7 @@
 import Logo from "../components/Logo";
 import SoundToggle from "../components/SoundToggle";
 import InfoButton from "../components/InfoButton";
+import CardGrid from "../components/CardGrid";
 
 function GamePage() {
   return (
@@ -8,6 +9,7 @@ function GamePage() {
       <Logo variant="game" />
       <InfoButton />
       <SoundToggle />
+      <CardGrid />
     </div>
   );
 }

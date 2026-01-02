@@ -29,7 +29,7 @@ function InfoButton() {
 
       {isOpen && (
         <div
-          className="absolute py-7 px-8 w-96 border border-gray-400 info-box"
+          className="absolute z-50 py-7 px-8 w-96 border border-gray-400 info-box"
           style={{
             top: `${popupPosition.top}px`,
             left: `${popupPosition.left}px`,
