@@ -18,6 +18,7 @@ function CardGrid() {
     shuffleCard(copy);
     return copy;
   });
+  const [allFlipped, setAllFlipped] = useState(false);
 
   function reshuffleCards() {
     const copy = [...shuffledCards];
@@ -30,7 +31,19 @@ function CardGrid() {
       const newClickedCards = [...clickedCards, cardId];
       setClickedCards(newClickedCards);
       console.log(newClickedCards);
-      reshuffleCards();
+
+      // flip cards to back as soon any card clicked
+      setAllFlipped(true);
+
+      // shuffle is being done while hidden
+      setTimeout(() => {
+        reshuffleCards();
+      }, 600);
+
+      // flip cards back to front
+      setTimeout(() => {
+        setAllFlipped(false);
+      }, 1000);
       //score will be incremented here passed as a prop from parent
     } else {
       //game over logic display here will make a component of that
@@ -44,6 +57,7 @@ function CardGrid() {
           key={card.id}
           image={card.image}
           name={card.name}
+          flipped={allFlipped}
           onClick={() => handleCardClick(card.id)}
         />
       ))}
