@@ -10,12 +10,17 @@ function InfoButton() {
   useEffect(() => {
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
+      const popupWidth = 384; 
+
+      let left = rect.left - popupWidth + 35; 
+
       setPopupPosition({
-        top: rect.bottom + 8,
-        left: rect.left,
+        top: rect.top + 50,
+        left: left,
       });
     }
   }, [isOpen]);
+  
 
   return (
     <>
@@ -29,7 +34,7 @@ function InfoButton() {
 
       {isOpen && (
         <div
-          className="absolute z-50 py-7 px-8 w-96 border border-gray-400 info-box"
+          className="absolute z-50 py-7 px-7 w-96 border border-gray-400 info-box"
           style={{
             top: `${popupPosition.top}px`,
             left: `${popupPosition.left}px`,
@@ -43,11 +48,11 @@ function InfoButton() {
             <FaTimes size={20} />
           </button>
 
-          <h2 className="text-2xl mb-2 text-center sub-title">Info</h2>
+          <h2 className="text-2xl mb-2 text-center oxenfree-text">Info</h2>
 
           <div className="w-full h-[2px] bg-gradient-to-r from-[#ccf8ec] via-transparent to-[#ccf8ec] mb-3"></div>
 
-          <p className="mt-2 text-[#dceef2] text-center">
+          <p className="mt-2 text-[#dceef2] text-center font-sans tracking-wide">
             Welcome to <strong>Oxenfree Memory</strong>. Click a card once to
             lock it & it can’t be chosen again, so remember your selections.
           </p>

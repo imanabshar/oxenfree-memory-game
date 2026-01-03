@@ -11,7 +11,7 @@ function shuffleCard(array) {
   }
 }
 
-function CardGrid() {
+function CardGrid({ incrementScore, currentScore, bestScore, setBestScore }) {
   const [clickedCards, setClickedCards] = useState([]);
   const [shuffledCards, setShuffledCards] = useState(() => {
     const copy = [...cards];
@@ -44,7 +44,15 @@ function CardGrid() {
       setTimeout(() => {
         setAllFlipped(false);
       }, 1000);
-      //score will be incremented here passed as a prop from parent
+
+      //increment the current score
+      incrementScore();
+
+      //compare current score with best score and update bestscore if needed
+      if (currentScore + 1 > bestScore) {
+        setBestScore(currentScore + 1);
+        localStorage.setItem("bestScore", currentScore + 1);
+      }
     } else {
       //game over logic display here will make a component of that
       console.log("duplicate card selected");

@@ -4,13 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* for glow around progress bar in loading page */
-.glow {
-    box-shadow:
-        0 0 6px rgba(186, 242, 229, 0.6),
-        0 0 16px rgba(186, 242, 229, 0.45),
-        0 0 36px rgba(186, 242, 229, 0.25);
-}
 
 /* for logo of the game */
 .oxenfree-spectral {
@@ -21,6 +14,7 @@
         0 0 28px rgba(40, 120, 115, 0.15);
 }
 
+/* for a subtle line on logo of game */
 .oxenfree-line::before {
     content: "";
     position: absolute;
@@ -36,6 +30,24 @@
         0 0 6px rgba(127, 220, 196, 0.5),
         0 0 14px rgba(63, 174, 163, 0.35);
     opacity: 0.8;
+}
+
+/* for text and sub-headings of game */
+.oxenfree-text {
+    font-family: "Cinzel", serif;
+    letter-spacing: 0.2em;
+    color: #baf2e5;
+    text-shadow:
+        1px 1px 0 rgba(0, 0, 0, 0.3),
+        2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* for glow around progress bar in loading page & around cards*/
+.glow {
+    box-shadow:
+        0 0 6px rgba(186, 242, 229, 0.6),
+        0 0 16px rgba(186, 242, 229, 0.45),
+        0 0 36px rgba(186, 242, 229, 0.25);
 }
 
 /* for start button */
@@ -99,15 +111,6 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(186, 242, 229, 0.2);
 }
 
-.sub-title {
-    font-family: "Cinzel", serif;
-    letter-spacing: 0.2em;
-    color: #baf2e5;
-    text-shadow:
-        1px 1px 0 rgba(0, 0, 0, 0.3),
-        2px 2px 2px rgba(0, 0, 0, 0.4);
-}
-
 /* for card flipping effect */
 .perspective {
     perspective: 1000px;
@@ -133,4 +136,16 @@
 
 .card-back {
     transform: rotateY(180deg);
+}
+
+/* for scoreboard */
+.scoreboard {
+    background: rgba(20, 31, 39, 0.55);
+    border-radius: 2px;
+    border-top: 1px solid rgba(186, 242, 229, 0.9);
+    border-bottom: 1px solid rgba(186, 242, 229, 0.9);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.45),
+        0 0 12px rgba(80, 160, 140, 0.1);
 }

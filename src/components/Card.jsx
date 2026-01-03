@@ -15,7 +15,7 @@ function Card({ image, name, flipped, onClick }) {
                 draggable="false"
                 className="w-full h-72 object-cover brightness-150"
               />
-              <p className="p-1 text-center text-xl sub-title">{name}</p>
+              <p className="p-1 text-center text-xl oxenfree-text">{name}</p>
             </div>
           </div>
 
