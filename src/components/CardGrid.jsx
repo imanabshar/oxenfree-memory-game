@@ -1,6 +1,7 @@
 import { useState } from "react";
 import cards from "../data/cards";
 import Card from "./Card";
+import GameOverPage from "../pages/GameOverPage";
 
 //shuffling cards through Fisher-Yates Algorithm
 function shuffleCard(array) {
@@ -19,6 +20,10 @@ function CardGrid({ incrementScore, currentScore, bestScore, setBestScore }) {
     return copy;
   });
   const [allFlipped, setAllFlipped] = useState(false);
+  const [gameOver, setGameOver] = useState({
+    status: false,
+    condition: null,
+  });
 
   function reshuffleCards() {
     const copy = [...shuffledCards];
@@ -27,49 +32,57 @@ function CardGrid({ incrementScore, currentScore, bestScore, setBestScore }) {
   }
 
   function handleCardClick(cardId) {
-    if (!clickedCards.includes(cardId)) {
-      const newClickedCards = [...clickedCards, cardId];
-      setClickedCards(newClickedCards);
-      console.log(newClickedCards);
 
-      // flip cards to back as soon any card clicked
-      setAllFlipped(true);
+    //checking if duplicate card clicked then setting condition to lose 
+    if (clickedCards.includes(cardId)) {
+      setGameOver({ status: true, condition: "lose" });
+      return;
+    }
 
-      // shuffle is being done while hidden
-      setTimeout(() => {
-        reshuffleCards();
-      }, 600);
+    const newClickedCards = [...clickedCards, cardId];
+    setClickedCards(newClickedCards);
+    console.log(newClickedCards);
 
-      // flip cards back to front
-      setTimeout(() => {
-        setAllFlipped(false);
-      }, 1000);
+    // flip cards to back as soon any card clicked
+    setAllFlipped(true);
+    // shuffle is being done while hidden
+    setTimeout(() => {
+      reshuffleCards();
+    }, 600);
+    // flip cards back to front
+    setTimeout(() => {
+      setAllFlipped(false);
+    }, 1000);
 
-      //increment the current score
-      incrementScore();
+    //increment the current score
+    incrementScore();
+    //compare current score with best score and update bestscore if needed
+    if (currentScore + 1 > bestScore) {
+      setBestScore(currentScore + 1);
+      localStorage.setItem("bestScore", currentScore + 1);
+    }
 
-      //compare current score with best score and update bestscore if needed
-      if (currentScore + 1 > bestScore) {
-        setBestScore(currentScore + 1);
-        localStorage.setItem("bestScore", currentScore + 1);
-      }
-    } else {
-      //game over logic display here will make a component of that
-      console.log("duplicate card selected");
+    //checking for win condition immeditely 
+    if (newClickedCards.length === cards.length) {
+      setGameOver({ status: true, condition: "win" });
+      return;
     }
   }
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
-      {shuffledCards.map((card) => (
-        <Card
-          key={card.id}
-          image={card.image}
-          name={card.name}
-          flipped={allFlipped}
-          onClick={() => handleCardClick(card.id)}
-        />
-      ))}
-    </div>
+    <>
+      {gameOver.status && <GameOverPage condition={gameOver.condition} />}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
+        {shuffledCards.map((card) => (
+          <Card
+            key={card.id}
+            image={card.image}
+            name={card.name}
+            flipped={allFlipped}
+            onClick={() => handleCardClick(card.id)}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
