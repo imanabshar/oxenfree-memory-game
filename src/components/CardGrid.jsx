@@ -8,78 +8,92 @@ import GameOverPage from "../pages/GameOverPage";
 function shuffleCard(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const random = Math.floor(Math.random() * (i + 1));
-
     [array[i], array[random]] = [array[random], array[i]];
   }
 }
 
-function CardGrid({ incrementScore, currentScore, setCurrentScore, bestScore, setBestScore }) {
+function CardGrid({
+  incrementScore,
+  currentScore,
+  setCurrentScore,
+  bestScore,
+  setBestScore,
+  totalRounds,
+}) {
   const navigate = useNavigate();
+
+  const [round, setRound] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
-  const [shuffledCards, setShuffledCards] = useState(() => {
-    const copy = [...cards];
-    shuffleCard(copy);
-    return copy;
-  });
   const [allFlipped, setAllFlipped] = useState(false);
   const [gameOver, setGameOver] = useState({
     status: false,
     condition: null,
   });
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  function reshuffleCards() {
-    const copy = [...shuffledCards];
+  // getting 4 random cards
+  function getRandomCards() {
+    const copy = [...cards];
     shuffleCard(copy);
-    setShuffledCards(copy);
+    return copy.slice(0, 4);
   }
 
+  const [visibleCards, setVisibleCards] = useState(getRandomCards);
+
   function handleCardClick(cardId) {
+    if (isAnimating) return;
+    setIsAnimating(true);
+
     //checking if duplicate card clicked then setting condition to lose
     if (clickedCards.includes(cardId)) {
       setGameOver({ status: true, condition: "lose" });
+      setIsAnimating(false);
       return;
     }
 
     const newClickedCards = [...clickedCards, cardId];
     setClickedCards(newClickedCards);
-    console.log(newClickedCards);
 
     // flip cards to back as soon any card clicked
     setAllFlipped(true);
+
     // shuffle is being done while hidden
     setTimeout(() => {
-      reshuffleCards();
-    }, 600);
-    // flip cards back to front
-    setTimeout(() => {
-      setAllFlipped(false);
-    }, 1000);
+      setVisibleCards(getRandomCards());
 
-    //increment the current score
+      // flip cards back to front
+      setTimeout(() => {
+        setAllFlipped(false);
+
+        // increment round
+        const nextRound = round + 1;
+        setRound(nextRound);
+
+        // check win after round increment
+        if (nextRound > totalRounds) {
+          setGameOver({ status: true, condition: "win" });
+        }
+
+        setIsAnimating(false);
+      }, 300);
+    }, 500);
+
     incrementScore();
     //compare current score with best score and update bestscore if needed
     if (currentScore + 1 > bestScore) {
       setBestScore(currentScore + 1);
       localStorage.setItem("bestScore", currentScore + 1);
     }
-
-    //checking for win condition immeditely
-    if (newClickedCards.length === cards.length) {
-      setGameOver({ status: true, condition: "win" });
-      return;
-    }
   }
 
   function handleRestart() {
     setClickedCards([]);
-    setShuffledCards(() => {
-      const copy = [...cards];
-      shuffleCard(copy);
-      return copy;
-    });
+    setRound(0);
+    setVisibleCards(getRandomCards());
     setAllFlipped(false);
     setGameOver({ status: false, condition: null });
-      setCurrentScore(0);
+    setCurrentScore(0);
+    setIsAnimating(false);
   }
 
   function handleBack() {
@@ -95,16 +109,23 @@ function CardGrid({ incrementScore, currentScore, setCurrentScore, bestScore, se
           onBack={handleBack}
         />
       )}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
-        {shuffledCards.map((card) => (
-          <Card
-            key={card.id}
-            image={card.image}
-            name={card.name}
-            flipped={allFlipped}
-            onClick={() => handleCardClick(card.id)}
-          />
-        ))}
+
+      <div className="flex items-center justify-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 justify-center">
+          {visibleCards.map((card) => (
+            <Card
+              key={card.id}
+              image={card.image}
+              name={card.name}
+              flipped={allFlipped}
+              onClick={() => handleCardClick(card.id)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="text-center mt-4 font-bold text-xl text-teal-100">
+        {Math.min(round, totalRounds)} / {totalRounds}
       </div>
     </>
   );
