@@ -20,6 +20,7 @@ function GamePage() {
       <CardGrid
         incrementScore={incrementScore}
         currentScore={currentScore}
+        setCurrentScore={setCurrentScore}
         bestScore={bestScore}
         setBestScore={setBestScore}
       />

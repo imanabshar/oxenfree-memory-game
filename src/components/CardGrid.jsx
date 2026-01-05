@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import cards from "../data/cards";
 import Card from "./Card";
 import GameOverPage from "../pages/GameOverPage";
@@ -12,7 +13,8 @@ function shuffleCard(array) {
   }
 }
 
-function CardGrid({ incrementScore, currentScore, bestScore, setBestScore }) {
+function CardGrid({ incrementScore, currentScore, setCurrentScore, bestScore, setBestScore }) {
+  const navigate = useNavigate();
   const [clickedCards, setClickedCards] = useState([]);
   const [shuffledCards, setShuffledCards] = useState(() => {
     const copy = [...cards];
@@ -32,8 +34,7 @@ function CardGrid({ incrementScore, currentScore, bestScore, setBestScore }) {
   }
 
   function handleCardClick(cardId) {
-
-    //checking if duplicate card clicked then setting condition to lose 
+    //checking if duplicate card clicked then setting condition to lose
     if (clickedCards.includes(cardId)) {
       setGameOver({ status: true, condition: "lose" });
       return;
@@ -62,15 +63,38 @@ function CardGrid({ incrementScore, currentScore, bestScore, setBestScore }) {
       localStorage.setItem("bestScore", currentScore + 1);
     }
 
-    //checking for win condition immeditely 
+    //checking for win condition immeditely
     if (newClickedCards.length === cards.length) {
       setGameOver({ status: true, condition: "win" });
       return;
     }
   }
+
+  function handleRestart() {
+    setClickedCards([]);
+    setShuffledCards(() => {
+      const copy = [...cards];
+      shuffleCard(copy);
+      return copy;
+    });
+    setAllFlipped(false);
+    setGameOver({ status: false, condition: null });
+      setCurrentScore(0);
+  }
+
+  function handleBack() {
+    navigate("/intro");
+  }
+
   return (
     <>
-      {gameOver.status && <GameOverPage condition={gameOver.condition} />}
+      {gameOver.status && (
+        <GameOverPage
+          condition={gameOver.condition}
+          onRestart={handleRestart}
+          onBack={handleBack}
+        />
+      )}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
         {shuffledCards.map((card) => (
           <Card

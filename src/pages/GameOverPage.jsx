@@ -1,7 +1,7 @@
 import win from "../assets/win.jpg";
 import lose from "../assets/lose.jpg";
 
-function GameOverPage({ condition }) {
+function GameOverPage({ condition, onRestart, onBack }) {
   const isWin = condition === "win";
 
   return (
@@ -39,12 +39,14 @@ function GameOverPage({ condition }) {
 
         <div className="flex justify-center gap-4">
           <button
+            onClick={onRestart}
             className="oxenfree-btn oxenfree-btn-secondary px-3 py-2"
           >
             Restart
           </button>
 
           <button
+            onClick={onBack}
             className="oxenfree-btn oxenfree-btn-secondary px-4 py-2"
           >
             Back
