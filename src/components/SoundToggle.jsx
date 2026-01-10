@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import sound from "../assets/sound.png";
 import muteSound from "../assets/muteSound.png";
-import bgMusic from "../assets/bg-music.mp3";
+import bgMusic from "../assets/sounds/bg-music.mp3";
 
 function SoundToggle() {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
   useEffect(() => {

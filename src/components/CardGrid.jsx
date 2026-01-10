@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import cards from "../data/cards";
 import Card from "./Card";
 import GameOverPage from "../pages/GameOverPage";
+import flip from "../assets/sounds/flip.mp3";
 
 //shuffling cards through Fisher-Yates Algorithm
 function shuffleCard(array) {
@@ -50,6 +51,11 @@ function CardGrid({
       setIsAnimating(false);
       return;
     }
+
+    const flipSound = new Audio(flip);
+    flipSound.volume = 0.1;
+    flipSound.currentTime = 0;
+    flipSound.play();
 
     const newClickedCards = [...clickedCards, cardId];
     setClickedCards(newClickedCards);
