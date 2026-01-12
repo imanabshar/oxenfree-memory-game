@@ -31,12 +31,12 @@ function LoadingPage() {
   }, [progress, navigate]);
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center">
-      <h1 className="mb-10 text-5xl tracking-[0.2em] oxenfree-spectral font-semibold">
+    <div className="w-screen h-screen flex flex-col items-center justify-center px-5">
+      <h1 className="mb-10 text-4xl sm:text-5xl tracking-[0.2em] oxenfree-spectral font-semibold text-center">
         LOADING...
       </h1>
 
-      <div className=" w-96 h-2 rounded overflow-hidden bg-[#1f2a2a] glow">
+      <div className="w-full max-w-md h-2 rounded overflow-hidden bg-[#1f2a2a] glow">
         <div
           className="h-full bg-[#baf2e5]"
           style={{ width: `${progress}%` }}
