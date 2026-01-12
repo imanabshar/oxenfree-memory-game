@@ -55,13 +55,12 @@
         0 0 36px rgba(186, 242, 229, 0.25);
 }
 
-/* for start button */
+/* for buttons */
 .oxenfree-btn {
     position: relative;
     font-family: "Cinzel", serif;
-    font-size: 2rem;
     font-weight: 800;
-    letter-spacing: 0.4em;
+    letter-spacing: 0.2em;
     color: #d6f5ec;
 
     background: linear-gradient(to bottom,
@@ -76,12 +75,6 @@
         0 0 14px rgba(80, 180, 160, 0.25);
 
     transition: all 0.35s ease;
-}
-
-/* for restart and back button in gameOver page */
-.oxenfree-btn-secondary {
-    letter-spacing: 0.2em;
-    font-size: 1.6rem;
 }
 
 .oxenfree-btn::before {

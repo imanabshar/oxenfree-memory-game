@@ -9,25 +9,28 @@ function IntroPage() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center py-16 gap-10">
+    <div className="flex flex-col justify-center items-center px-4 gap-10 h-screen">
       <Logo variant="intro" />
 
-      <div className="flex gap-6">
+      <div className="flex gap-4 sm:gap-6">
         <button
           onClick={() => handleStart("easy")}
-          className="oxenfree-btn oxenfree-btn-secondary px-8 py-4"
+          className="oxenfree-btn p-3 sm:px-8 sm:py-4 
+          sm:text-xl md:text-2xl"
         >
           Easy
         </button>
         <button
           onClick={() => handleStart("medium")}
-          className="oxenfree-btn oxenfree-btn-secondary px-6 py-4"
+          className="oxenfree-btn p-3 sm:px-8 sm:py-4
+          sm:text-xl md:text-2xl"
         >
           Medium
         </button>
         <button
           onClick={() => handleStart("hard")}
-          className="oxenfree-btn oxenfree-btn-secondary px-6 py-4"
+          className="oxenfree-btn p-3 sm:px-8 sm:py-4 
+          sm:text-xl md:text-2xl"
         >
           Hard
         </button>

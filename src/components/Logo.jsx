@@ -7,7 +7,7 @@ function Logo({ variant }) {
         className={`relative oxenfree-spectral oxenfree-line font-semibold
           ${
             isIntro
-              ? "text-[7rem] tracking-[0.3em]"
+              ? "text-[3rem] sm:text-[5rem] md:text-[6rem] lg:text-[7rem] tracking-[0.2em] sm:tracking-[0.3em]"
               : "text-6xl tracking-[0.25em]"
           }
         `}
@@ -19,7 +19,7 @@ function Logo({ variant }) {
         className={`uppercase text-[#9fded0]
           ${
             isIntro
-              ? "text-4xl tracking-[0.65em]"
+              ? "text-2xl sm:text-3xl md:text-4xl tracking-[0.5em] sm:tracking-[0.65em]"
               : "text-2xl tracking-[0.5em]"
           }
         `}
