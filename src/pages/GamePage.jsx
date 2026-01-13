@@ -27,7 +27,7 @@ function GamePage() {
   });
 
   return (
-    <div className="px-10 py-5">
+    <div className="px-4 md:px-10 py-5">
       <Logo variant="game" />
       <ScoreBoard currentScore={currentScore} bestScore={bestScore} />
 

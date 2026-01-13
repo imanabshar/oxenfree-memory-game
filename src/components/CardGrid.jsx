@@ -116,8 +116,8 @@ function CardGrid({
         />
       )}
 
-      <div className="flex items-center justify-center">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 justify-center">
+      <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {visibleCards.map((card) => (
             <Card
               key={card.id}
