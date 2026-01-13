@@ -16,7 +16,7 @@ function GameOverPage({ condition, onRestart, onBack }) {
       {/* content */}
       <div className="relative z-10 p-8 rounded-xl text-center">
         <h1
-          className={`text-7xl font-bold mb-4 oxenfree-text ${
+          className={`text-4xl sm:text-6xl md:text-7xl font-bold mb-4 oxenfree-text ${
             !isWin && "oxenfree-text-red"
           }`}
         >
@@ -24,14 +24,14 @@ function GameOverPage({ condition, onRestart, onBack }) {
         </h1>
 
         <h1
-          className={`text-5xl font-bold mb-3 ${
+          className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-3 ${
             isWin ? "text-teal-100" : "text-red-400"
           }`}
         >
           {isWin ? "You Win!" : "You Lose!"}
         </h1>
 
-        <p className="text-[#dceef2] text-xl mb-8 tracking-wide">
+        <p className="text-[#dceef2] text-base sm:text-lg md:text-xl mb-8 tracking-wide">
           {isWin
             ? "You remembered every signal."
             : "You selected the same card twice."}
@@ -40,14 +40,16 @@ function GameOverPage({ condition, onRestart, onBack }) {
         <div className="flex justify-center gap-4">
           <button
             onClick={onRestart}
-            className="oxenfree-btn oxenfree-btn-secondary px-3 py-2"
+            className="oxenfree-btn p-3 sm:px-8 sm:py-4
+          sm:text-xl md:text-2xl"
           >
             Restart
           </button>
 
           <button
             onClick={onBack}
-            className="oxenfree-btn oxenfree-btn-secondary px-4 py-2"
+            className="oxenfree-btn p-3 sm:px-8 sm:py-4
+          sm:text-xl md:text-2xl"
           >
             Back
           </button>
