@@ -10,9 +10,12 @@ function InfoButton() {
   useEffect(() => {
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
-      const popupWidth = 384; 
+      const popupWidth = window.innerWidth < 640 ? window.innerWidth - 32 : 380;
 
-      let left = rect.left - popupWidth + 35; 
+      let left = rect.left - popupWidth + 35;
+
+      if (left < 16) left = 16;
+      if (left + popupWidth > window.innerWidth) left = window.innerWidth - popupWidth - 16;
 
       setPopupPosition({
         top: rect.top + 50,
@@ -20,7 +23,6 @@ function InfoButton() {
       });
     }
   }, [isOpen]);
-  
 
   return (
     <>
@@ -29,12 +31,12 @@ function InfoButton() {
         onClick={() => setIsOpen(!isOpen)}
         className="hover:scale-110 transition-transform"
       >
-        <img src={info} alt="Info" className="w-24 h-16" />
+        <img src={info} alt="Info" className="w-16 h-16" />
       </button>
 
       {isOpen && (
         <div
-          className="absolute z-50 py-7 px-7 w-96 border border-gray-400 info-box"
+          className="absolute z-50 py-7 px-7 w-[90vw] max-w-md sm:w-96 border border-gray-400 info-box"
           style={{
             top: `${popupPosition.top}px`,
             left: `${popupPosition.left}px`,
