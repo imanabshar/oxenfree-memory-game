@@ -31,7 +31,7 @@ function InfoButton() {
         onClick={() => setIsOpen(!isOpen)}
         className="hover:scale-110 transition-transform"
       >
-        <img src={info} alt="Info" className="w-16 h-16" />
+        <img src={info} alt="Info" className="w-24 h-16" />
       </button>
 
       {isOpen && (
